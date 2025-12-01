@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import AdminDashboard from './components/AdminDashboard';
+import UserTracking from './components/UserTracking';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <nav style={{ padding: 10, background: '#333' }}>
+        <Link to="/" style={{ color: 'white', marginRight: 15 }}>Kargo Sorgula</Link>
+        <Link to="/admin" style={{ color: '#e67e22' }}>Admin Paneli</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<UserTracking />} />
+        
+        <Route path="/admin" element={<AdminDashboard />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
+
