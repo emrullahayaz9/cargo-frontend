@@ -31,12 +31,12 @@ const UserTracking: React.FC = () => {
 
   const startTracking = () => {
     if (!trackingNo.trim()) {
-        alert("Lütfen bir takip numarası giriniz.");
+        alert("Please enter your tracking number.");
         return;
     }
     
     if (clientRef.current && clientRef.current.active) {
-        console.log("Eski bağlantı kapatılıyor...");
+        console.log("Old connection closing...");
         clientRef.current.deactivate();
     }
 
@@ -47,14 +47,14 @@ const UserTracking: React.FC = () => {
       webSocketFactory: () => new SockJS('http://localhost:8080/ws'),
       reconnectDelay: 5000,
       onConnect: () => {
-        console.log(`✅ Bağlandı! Dinlenen kanal: /topic/tracking/${trackingNo.trim()}`);
+        console.log(`✅ Connected to: /topic/tracking/${trackingNo.trim()}`);
         setIsConnected(true);
         
         client.subscribe(`/topic/tracking/${trackingNo.trim()}`, (message) => {
           if (message.body) {
             const data: CargoLocation = JSON.parse(message.body);
             setCargo(data);
-            console.log("Yeni konum alındı:", data.trackingNumber);
+            console.log("New Location:", data.trackingNumber);
           }
         });
       },
@@ -92,11 +92,11 @@ const UserTracking: React.FC = () => {
           zIndex: 1000,
           color: 'white'
       }}>
-        <h2 style={{ margin: '0 0 15px 0', fontWeight: '600' }}>📦 Kargom Nerede?</h2>
+        <h2 style={{ margin: '0 0 15px 0', fontWeight: '600' }}>📦 Where is my cargo?</h2>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', maxWidth: '500px', margin: '0 auto' }}>
             <input 
             type="text" 
-            placeholder="Örn: TR-001" 
+            placeholder="Example: TR-001" 
             value={trackingNo}
             onChange={(e) => setTrackingNo(e.target.value.toUpperCase())}
             onKeyPress={(e) => e.key === 'Enter' && startTracking()}
@@ -126,7 +126,7 @@ const UserTracking: React.FC = () => {
                 boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
             }}
             >
-            {isConnected ? 'Takip Ediliyor...' : 'Sorgula'}
+            {isConnected ? 'Takip Ediliyor...' : 'make an inquiry'}
             </button>
         </div>
         {isConnected && cargo && <p style={{marginTop: '10px', fontSize: '0.9rem'}}>✅ Canlı bağlantı aktif. Konum bekleniyor...</p>}

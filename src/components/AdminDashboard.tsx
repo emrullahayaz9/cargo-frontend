@@ -74,10 +74,10 @@ const AdminDashboard: React.FC = () => {
         boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
         zIndex: 1000 
       }}>
-        <h2 style={{ margin: 0 }}>🚚 Lojistik Takip Sistemi</h2>
+        <h2 style={{ margin: 0 }}>🚚 Logistic following system</h2>
         <div style={{ display: 'flex', gap: '20px' }}>
           <span style={{ backgroundColor: '#05c46b', padding: '5px 15px', borderRadius: '4px', fontWeight: 'bold' }}>
-            Aktif Araç: {activeCargoList.length}
+            active cargos: {activeCargoList.length}
           </span>
         </div>
       </header>
