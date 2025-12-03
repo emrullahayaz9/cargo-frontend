@@ -4,3 +4,4 @@
 4. run `npm start`
 
 ## Ensure backend server is running.
+## Ensure this frontend is not running on port 3000. (Grafana will be up on port 3000)
